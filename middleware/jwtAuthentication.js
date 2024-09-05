@@ -1,12 +1,13 @@
 const jwt = require("jsonwebtoken");
 
-// MIDDLEWARE TO VERIFY JWT TOKEN 
+// MIDDLEWARE TO VERIFY JWT TOKEN
 const jwtMiddleware = (req, res, next) => {
   //extracting token from header
   const token = req.headers["authorization"].split(" ")[1];
   try {
     //verifying token
     const jwtResponse = jwt.verify(token, "secretkey123");
+    console.log(jwtResponse.userId);
     req.payload = jwtResponse.userId;
     next();
   } catch (err) {
